@@ -1,0 +1,10 @@
+@import "~materialize-css/sass/components/color-variables";
+$primary-color: color("blue", "darken-4") !default;
+
+@import "~materialize-css/sass/materialize";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
