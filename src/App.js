@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 
 import firebase from 'firebase';
@@ -8,15 +8,21 @@ import 'firebase/database';
 import Nav from './components/Nav';
 import Map from './components/Map';
 import TargetCard from './components/TargetCard';
+import Form from './components/Form'
 
-class App extends Component {
+class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            targets: []
+            targets: [],
+            modal: false,
         };
         this.app = firebase.initializeApp(DB_CONFIG);
         this.db = this.app.database().ref().child('target');
+    }
+
+    showModal() {
+        this.refs.form.toggle();
     }
 
     componentDidMount() {
@@ -45,32 +51,22 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Nav> </Nav>
+                <Nav/>
                 <div className="container">
+                    <Form ref="form"/>
                     <div className="row" style={{marginTop: '5vh'}}>
-                        <div className="col s12 m6">
+                        <div className="col-md-6">
                             <Map/>
                         </div>
-                        <div className="col s12 m6">
-                            <TargetCard/>
+                        <div className="col-md-6">
+                            <TargetCard showModal={this.showModal.bind(this)}/>
                         </div>
                     </div>
-                </div>
-                /* Floating Butoon */
-                <div className="fixed-action-btn">
-                    <a className="btn-floating btn-large red">
-                        <i className="fas fa-plus"/>
-                    </a>
-                    <ul>
-                        <li><a className="btn-floating red"><i className="material-icons">insert_chart</i></a></li>
-                        <li><a className="btn-floating yellow darken-1"><i className="material-icons">format_quote</i></a></li>
-                        <li><a className="btn-floating green"><i className="material-icons">publish</i></a></li>
-                        <li><a className="btn-floating blue"><i className="material-icons">attach_file</i></a></li>
-                    </ul>
                 </div>
             </div>
         );
     }
+
 }
 
 export default App;

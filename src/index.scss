@@ -1,7 +1,4 @@
-@import "~materialize-css/sass/components/color-variables";
-$primary-color: color("blue", "darken-4") !default;
-
-@import "~materialize-css/sass/materialize";
+@import "~bootstrap/scss/bootstrap";
 
 body {
   margin: 0;

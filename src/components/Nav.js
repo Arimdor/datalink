@@ -4,18 +4,12 @@ import logo from '../logo.svg';
 class Nav extends Component {
     render() {
         return (
-            <nav>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
-                    <div className="nav-wrapper">
-                        <a href="" className="brand-logo">
-                            <img src={logo} className="App-logo" alt="logo"/>
-                        </a>
-                        <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><a href="">Sass</a></li>
-                            <li><a href="">Components</a></li>
-                            <li><a href="">JavaScript</a></li>
-                        </ul>
-                    </div>
+                    <a className="navbar-brand" href="#">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <span className="text-monospace">DATALINK 718th</span>
+                    </a>
                 </div>
             </nav>
         )
