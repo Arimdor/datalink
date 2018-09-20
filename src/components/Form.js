@@ -1,14 +1,35 @@
 import React, {Component} from 'react';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 class Form extends Component {
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            modal: false
+            modal: false,
+            target: {
+                type: null,
+                lat: null,
+                lng: null,
+                status: null
+            }
         };
-        this.toggle = this.toggle.bind(this);
+    }
+
+    handleInput(e) {
+        const {value, name} = e.target;
+        let target = this.state.target;
+        target[name] = value;
+        this.setState({
+            target
+        });
+        console.log(this.state.target)
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.addTarget(this.state.target);
+        this.toggle();
     }
 
     toggle() {
@@ -20,18 +41,40 @@ class Form extends Component {
     render() {
         return (
             <div>
-                <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
                     <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-                    <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </ModalBody>
-                    <ModalFooter>
-                        <button className="btn btn-primary" onClick={this.toggle}>Do Something</button>
-                        {' '}
-                        <button color="btn btn-secondary" onClick={this.toggle}>Cancel</button>
-                    </ModalFooter>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <ModalBody>
+                            <div className="form-group">
+                                <select name="type" id="type" className="form-control" onChange={this.handleInput.bind(this)} required>
+                                    <option className="text-muted" value="">Tipo</option>
+                                    <option value="AA">AA</option>
+                                    <option value="Armored">Armored</option>
+                                    <option value="Building">Building</option>
+                                    <option value="IR">IR</option>
+                                    <option value="SAM">SAM</option>
+                                    <option value="Vehicle">Vehicle</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <input name="lat" id="lat" type="text" className="form-control" placeholder="Latitude" onChange={this.handleInput.bind(this)}/>
+                            </div>
+                            <div className="form-group">
+                                <input name="lng" id="lng" type="text" className="form-control" placeholder="Longitude" onChange={this.handleInput.bind(this)}/>
+                            </div>
+                            <div className="form-group">
+                                <select name="status" id="status" className="form-control" onChange={this.handleInput.bind(this)} required>
+                                    <option value="">Estado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Destruido">Destruido</option>
+                                </select>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary" type="submit">Save</button>
+                            <button className="btn btn-neutral" onClick={this.toggle.bind(this)}>Cancel</button>
+                        </ModalFooter>
+                    </form>
                 </Modal>
             </div>
         )

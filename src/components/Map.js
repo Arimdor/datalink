@@ -4,16 +4,16 @@ import GoogleMapReact from 'google-map-react';
 class Map extends Component {
     static defaultProps = {
         center: {
-            lat: -12.0552073,
-            lng: -77.0627323
+            lat: 43.5000000,
+            lng: 41.3000000
         },
-        zoom: 11
+        zoom: 7
     };
 
     render() {
         return (
             // Important! Always set the container height explicitly
-            <div style={{height: '80vh', width: '100% !important', marginBottom: '1rem'}}>
+            <div style={{height: '70vh', width: '100% !important'}}>
                 <GoogleMapReact
                     bootstrapURLKeys={{key: 'AIzaSyAb9G56azF-SF7hBDi2Q7bTvGKAPkQVpVk'}}
                     defaultCenter={this.props.center}

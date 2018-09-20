@@ -2,32 +2,36 @@ import React, {Component} from 'react';
 
 class TargetCard extends Component {
     render() {
+        const targets = this.props.targets.map((target, i) => {
+            return (
+                <li key={i} className="list-group-item">
+                    <div className="d-flex justify-content-between align-items-center">
+                                <span className="text-monospace">
+                                    <b>Type:</b> {target.type}&nbsp;
+                                    <b>Lat:</b> {target.lat}&nbsp;
+                                    <b>Lng:</b> {target.lng}&nbsp;
+                                    <b>Status:</b> {target.status}&nbsp;
+                                </span>
+                        <button className="btn btn-danger btn-sm float-right" onClick={() => this.props.deleteTarget(target.id)}><i className="fas fa-minus-circle"/></button>
+                    </div>
+                </li>
+            )
+        });
+
         return (
             <div>
                 <div className="card">
                     <div className="card-header">
                         <div className="d-flex justify-content-between align-items-center">
-                            <span>List of targets</span>
-                            <button type="button" id="btnModal" className="btn btn-primary btn-sm" onClick={this.props.showModal}><
-                                i className="fas fa-plus"/>
+                            <span>Targets</span>
+                            <button type="button" id="btnModal" className="btn btn-primary btn-sm" onClick={this.props.showModal}>
+                                <i className="fas fa-plus"/>
                             </button>
                         </div>
 
                     </div>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <div className="d-flex justify-content-between align-items-center">
-                                <span style={{fontSize: '14px'}} className="text-monospace">
-                                    <b>Type:</b> TOR&nbsp;
-                                    <b>Lat:</b> 42.991238&nbsp;
-                                    <b>Lng:</b> 44.2971325&nbsp;
-                                    <b>Status:</b> Destruido&nbsp;
-                                </span>
-                                <form action="/delete/4" method="post">
-                                    <button className="btn btn-danger btn-sm float-right"><i className="fas fa-minus-circle"></i></button>
-                                </form>
-                            </div>
-                        </li>
+                        {targets}
                     </ul>
                 </div>
             </div>

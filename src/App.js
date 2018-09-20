@@ -15,7 +15,6 @@ class App extends React.Component {
         super();
         this.state = {
             targets: [],
-            modal: false,
         };
         this.app = firebase.initializeApp(DB_CONFIG);
         this.db = this.app.database().ref().child('target');
@@ -25,18 +24,35 @@ class App extends React.Component {
         this.refs.form.toggle();
     }
 
+    addTarget(target) {
+        console.log(target);
+        this.db.push().set(target)
+    }
+
+    deleteTarget(id) {
+        console.log(id);
+        if (window.confirm('Are you sure you want delete')) {
+            this.db.child(id).remove().then(
+                this.render()
+            );
+        }
+    }
+
     componentDidMount() {
         const {targets} = this.state;
         this.db.on('child_added', snap => {
             targets.push({
                 id: snap.key,
-                type: snap.type,
-                lat: snap.lat,
-                lng: snap.lng,
-                state: snap.state
+                type: snap.val().type,
+                lat: snap.val().lat,
+                lng: snap.val().lng,
+                status: snap.val().status
             });
-            this.setState({targets})
+            this.setState({targets});
+            console.log(targets);
+
         });
+
         this.db.on('child_removed', snap => {
             for (let i = 0; i < targets.length; i++) {
                 if (targets[i].id === snap.key) {
@@ -52,14 +68,14 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Nav/>
-                <div className="container">
-                    <Form ref="form"/>
-                    <div className="row" style={{marginTop: '5vh'}}>
-                        <div className="col-md-6">
+                <div className="container-fluid pb-5">
+                    <Form ref="form" addTarget={this.addTarget.bind(this)}/>
+                    <div className="row" style={{marginTop: '2rem'}}>
+                        <div className="col-md-5 offset-md-1">
                             <Map/>
                         </div>
-                        <div className="col-md-6">
-                            <TargetCard showModal={this.showModal.bind(this)}/>
+                        <div className="col-md-5 mt-4 mt-md-0">
+                            <TargetCard targets={this.state.targets} deleteTarget={this.deleteTarget.bind(this)} showModal={this.showModal.bind(this)}/>
                         </div>
                     </div>
                 </div>
