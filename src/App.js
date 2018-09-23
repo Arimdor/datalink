@@ -16,20 +16,25 @@ class App extends React.Component {
         this.state = {
             targets: [],
         };
+
+        this.handleModal = this.handleModal.bind(this);
+        this.handleAddTarget = this.handleAddTarget.bind(this);
+        this.handleDeleteTarget = this.handleDeleteTarget.bind(this);
+
         this.app = firebase.initializeApp(DB_CONFIG);
         this.db = this.app.database().ref().child('target');
     }
 
-    showModal() {
-        this.refs.form.toggle();
+    handleModal() {
+        this.refs.form.handleToggleModal();
     }
 
-    addTarget(target) {
+    handleAddTarget(target) {
         console.log(target);
         this.db.push().set(target)
     }
 
-    deleteTarget(id) {
+    handleDeleteTarget(id) {
         console.log(id);
         if (window.confirm('Are you sure you want delete')) {
             this.db.child(id).remove().then(
@@ -69,13 +74,15 @@ class App extends React.Component {
             <div className="App">
                 <Nav/>
                 <div className="container-fluid pb-5">
-                    <Form ref="form" addTarget={this.addTarget.bind(this)}/>
+                    <Form ref="form" addTarget={this.handleAddTarget}/>
                     <div className="row" style={{marginTop: '2rem'}}>
-                        <div className="col-md-5 offset-md-1">
-                            <Map/>
+                        <div className="col-12 col-md-5 offset-md-1">
+                            <div id="mapContainer">
+                                <Map/>
+                            </div>
                         </div>
-                        <div className="col-md-5 mt-4 mt-md-0">
-                            <TargetCard targets={this.state.targets} deleteTarget={this.deleteTarget.bind(this)} showModal={this.showModal.bind(this)}/>
+                        <div className="col-12 col-md-5 mt-4 mt-md-0">
+                            <TargetCard targets={this.state.targets} deleteTarget={this.handleDeleteTarget} showModal={this.handleModal}/>
                         </div>
                     </div>
                 </div>
