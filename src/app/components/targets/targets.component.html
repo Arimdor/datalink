@@ -1,0 +1,31 @@
+<div>
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <span>Targets</span>
+        <button type="button" id="btnModal" class="btn btn-primary btn-sm" (click)="open()">
+          <i class="fas fa-plus"> </i>
+        </button>
+      </div>
+
+    </div>
+    <ul class="list-group list-group-flush" *ngIf="targets?.length > 0; else noTargets">
+      <!-- Targets -->
+      <li class="list-group-item" *ngFor="let target of targets">
+        <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-monospace">
+                                    <b>Type:</b> {{target.type}}&nbsp;
+                                    <b style="padding-right: 3px">Loc: N</b>0{{target.lat}} <b style="padding-right: 3px">E</b>{{target.lng}}
+                                    <b>{{target.status}}</b>
+                                </span>
+          <button class="btn btn-danger btn-sm float-right" (click)="deleteTarget($event, target.id)"><i class="fas fa-minus-circle"></i></button>
+        </div>
+      </li>
+      <!-- End of Targets -->
+    </ul>
+  </div>
+</div>
+
+<ng-template #noTargets>
+  <p class="text-muted mt-3 text-center">No hay elementos</p>
+</ng-template>
