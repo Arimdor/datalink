@@ -1,0 +1,60 @@
+<form (submit)="onSubmit()">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <select name="type" id="type" class="form-control" [(ngModel)]="target.type" required title="Type">
+        <option value="type" class="text-muted" disabled>Type</option>
+        <option value="AA">AAA</option>
+        <option value="Armored">Armored</option>
+        <option value="Building">Building</option>
+        <option value="IR">IR</option>
+        <option value="SAM">SAM</option>
+        <option value="Vehicle">Vehicle</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="lat_degrees">Lat degrees</label>
+        <input name="lat" id="lat_degrees" type="number" class="form-control" [(ngModel)]="coord.lat_degrees" required/>
+      </div>
+      <div class="form-group col-4">
+        <label for="lat_minute">Lat minutes</label>
+        <input name="lat" id="lat_minute" type="number" class="form-control" [(ngModel)]="coord.lat_minutes" required/>
+      </div>
+      <div class="form-group col-4">
+        <label for="lat_seconds">Lat seconds</label>
+        <input name="lat" id="lat_seconds" type="number" class="form-control" [(ngModel)]="coord.lat_seconds" required/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="lat_degrees">Lon degrees</label>
+        <input name="lng" id="lng_degrees" type="number" class="form-control" placeholder="Lng degrees" [(ngModel)]="coord.lng_degrees" required/>
+      </div>
+      <div class="form-group col-4">
+        <label for="lat_minute">Lon minutes</label>
+        <input name="lng" id="lng_minutes" type="number" class="form-control" placeholder="Lng minutes" [(ngModel)]="coord.lng_minutes" required t/>
+      </div>
+      <div class="form-group col-4">
+        <label for="lat_seconds">Lon seconds</label>
+        <input name="lng" id="lng_seconds" type="number" class="form-control" placeholder="Lng seconds" [(ngModel)]="coord.lng_seconds" required t/>
+      </div>
+    </div>
+    <div class="form-group">
+      <select name="status" id="status" class="form-control" [(ngModel)]="target.status" required title="Status">
+        <option value="status" class="text-muted" disabled>Status</option>
+        <option value="Activo">Activo</option>
+        <option value="Destruido">Destruido</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-neutral" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+  </div>
+</form>
