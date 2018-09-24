@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormComponent } from '../form/form.component';
 import { TargetService } from '../../services/target.service';
-import { Target } from '../../models/target';
+import { Target } from '../../models/Target';
 
 
 @Component({

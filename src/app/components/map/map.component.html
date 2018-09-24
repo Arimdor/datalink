@@ -1,3 +1,5 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-marker *ngFor="let target of mTargets" [latitude]="target.lat" [longitude]="target.lng" [title]="target.type"></agm-marker>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="styles">
+  <agm-marker *ngFor="let target of mTargets" [latitude]="target.gLat" [longitude]="target.gLng" [title]="target.type">
+    <agm-info-window>{{target.type}} {{target.status}} N{{target.lat}} E{{target.lng}} </agm-info-window>
+  </agm-marker>
 </agm-map>
