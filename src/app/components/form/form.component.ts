@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Target } from '../../models/target';
+import { Target } from '../../models/Target';
 import { TargetService } from '../../services/target.service';
 
 @Component({
