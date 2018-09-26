@@ -34,7 +34,7 @@ import { FormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAb9G56azF-SF7hBDi2Q7bTvGKAPkQVpVk'
+      apiKey: 'AIzaSyDc1rIxQjMnyMcx3_CA-WFVD0HKkk3vQbY'
     })
   ],
   providers: [TargetService, NgbActiveModal],
